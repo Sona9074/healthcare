@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>Medical History</h1>
+
+
+{% for history in medical %}
+
+<p>
+
+Name : {{history.name}}<br><br>
+Blood Group : {{history.bloodgroup}}<br><br>
+Prescription : {{history.prescription}}<br><br>
+Allergies : {{history.allergies}}<br><br>
+Last Checkup Date : {{history.last_checkup_date }}<br><br>
+
+</p>
+
+
+{% endfor %}
+
+<a href="{{request.META.HTTP_REFERER}}">Go Back</a>
+
+
+   
+
+
+{% endblock %}

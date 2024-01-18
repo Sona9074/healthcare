@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<h1>Patient Record</h1>
+<p>
+    Name : {{record.name}}<br><br>
+    Age : {{record.age}}<br><br>
+    Birthdate : {{record.birthdate}}<br><br>
+    Phone : {{record.phone}}<br><br>
+    Gender : {{record.gender}}<br><br>
+    Address : {{record.address}}<br><br>
+</p>
+
+<a href="{% url 'medical' %}">Medical History</a>
+
+<a href="{% url 'appoinment' %}">Appoinment Details</a><br><br><br>
+
+<a href="{% url 'update-record' record.id %}">Edit</a>
+<a href="{% url 'delete-record' record.id %}">Delete</a>
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+<h1>Appoinmnet Details</h1>
+
+{% for detail in appoinment%}
+
+Name : {{detail.name}}<br><br>
+Date : {{detail.date}}<br><br>
+Purpose : {{detail.purpose}}<br><br>
+Notes : {{detail.notes}}<br><br>
+
+
+
+{% endfor %}
+<a href="{{request.META.HTTP_REFERER}}">Go Back</a>
+
+{% endblock %}

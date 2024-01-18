@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+<div>
+
+  
+    
+    
+    <div>
+        {% for record in records %}
+
+        <div>
+            <h5>{{record.id}} -- <a href="{% url 'record' record.id %}">{{record.name}}</a></h5>
+            <a href="{% url 'update-record' record.id %}">Edit</a>
+            <a href="{% url 'delete-record' record.id %}">Delete</a>
+            <hr>
+            
+        </div>
+
+
+        {% endfor %}
+
+        
+        
+        
+        
+    </div>
+</div>
+
+{% endblock %}

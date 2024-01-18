@@ -1,0 +1,14 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('',views.home,name="home"),
+    path('record/<str:pk>/',views.record,name="record"),
+    path('create-record/',views.createRecord,name="create-record"),
+    path('update-record/<str:pk>/',views.updateRecord,name="update-record"),
+    path('delete-record/<str:pk>/',views.deleteRecord,name="delete-record"),
+    path('medical-history/',views.medicalHistory,name="medical-history"),
+    path('appoinments/',views.appoinments,name="appoinments"),
+    path('medical/',views.medical,name="medical"),
+    path('appoinment/',views.appoinment,name="appoinment"),
+]
