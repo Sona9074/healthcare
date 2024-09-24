@@ -2,8 +2,9 @@
 
 {% block content %}
 
-<div>
-    <form method="POST" action="">
+<div style="background:#daebe8;">
+    
+    <form method="POST" action="" style="margin-bottom: 100px; padding: 20px;">
         {% csrf_token %}
         {{form.as_p}}
 

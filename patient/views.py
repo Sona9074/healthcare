@@ -17,9 +17,12 @@ def home(request):
     return render(request,'patient/home.html',context)
 
 def record(request,pk):
-    record = PatientDetail.objects.get(id=pk)
-    context = {'record':record}
-    return render(request,'patient/record.html',context)
+    try:
+        record = PatientDetail.objects.get(id=pk)
+        context = {'record':record}
+        return render(request,'patient/record.html',context)
+    except PatientDetail.DoesNotExist:
+        return render(request,'patient/error.html')
 
 def createRecord(request):
     form = RecordForm()
@@ -63,6 +66,18 @@ def medicalHistory(request):
     context ={'form':form}
     return render(request,'patient/patient_form.html',context)
 
+def updateMedicalHistory(request,pk):
+    medical = MedicalRecord.objects.get(id=pk)
+    form = MedicalRecordForm(instance=medical)
+
+    if request.method == 'POST':
+        form = MedicalRecordForm(request.POST,instance=medical)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {'form':form}
+    return render(request,'patient/patient_form.html',context)
+
 def appoinments(request):
     form = AppoinmentForm()
     if request.method == 'POST':
@@ -74,15 +89,48 @@ def appoinments(request):
     context ={'form':form}
     return render(request,'patient/patient_form.html',context)
 
+def updateAppointment(request,pk):
+    appointment = MedicalRecord.objects.get(id=pk)
+    form = MedicalRecordForm(instance=appointment)
 
-def medical(request):
-    medical = MedicalRecord.objects.all()
-    context = {'medical':medical}
-    return render(request,'patient/medical_history.html',context)
+    if request.method == 'POST':
+        form = MedicalRecordForm(request.POST,instance=appointment)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {'form':form}
+    return render(request,'patient/patient_form.html',context)
 
-def appoinment(request):
-    appoinment = Appoinment.objects.all()
-    context = {'appoinment':appoinment}
-    return render(request,'patient/appoinment.html',context)
+
+def medical(request,pk):
+    try:
+        record = MedicalRecord.objects.get(id=pk)
+        context = {'record':record}
+        return render(request,'patient/medical_history.html',context)
+    except MedicalRecord.DoesNotExist:
+        return render(request,'patient/error.html')
+
+def appoinment(request,pk):
+    try :
+        record = Appoinment.objects.get(id=pk)
+        context = {'record':record}
+        return render(request,'patient/appoinment.html',context)
+    except Appoinment.DoesNotExist:
+        return render(request,'patient/error.html')
+    
+    
+def deleteMedicalRecord(request,pk):
+    record = MedicalRecord.objects.get(id=pk)
+    if request.method == 'POST':
+        record.delete()
+        return redirect('home')
+    return render(request,'patient/delete.html',{'obj':record})
+
+def deleteAppointment(request,pk):
+    record = Appoinment.objects.get(id=pk)
+    if request.method == 'POST':
+        record.delete()
+        return redirect('home')
+    return render(request,'patient/delete.html',{'obj':record})
 
 
